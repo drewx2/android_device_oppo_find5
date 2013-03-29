@@ -35,7 +35,7 @@ PRODUCT_COPY_FILES += \
 	device/oppo/find5/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
 	device/oppo/find5/ramdisk/init.qcom.rc:root/init.qcom.rc \
     device/oppo/find5/ramdisk/init.qcom.sh:root/init.qcom.sh \
-    device/oppo/find5/ramdisk/init.qcom.usb.sh:root/init.qcom..usb.sh \
+    device/oppo/find5/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
 	device/oppo/find5/ramdisk/init.rf.rc:root/init.rf.rc \
     device/oppo/find5/ramdisk/ueventd.qcom.rc:root/ueventd.qcom.rc \
 	device/oppo/find5/ramdisk/wlan.rle:root/wlan.rle \
