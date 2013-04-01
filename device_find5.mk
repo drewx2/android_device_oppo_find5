@@ -16,10 +16,15 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/oppo/find5/overlay
+# call board specific makefile
+$(call inherit-product, device/oppo/find5/apq8064.mk)
+
+DEVICE_PACKAGE_OVERLAYS += \
+	device/oppo/find5/overlay
 
 # Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += \
+	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 # Boot ramdisk setup
 PRODUCT_COPY_FILES += \
