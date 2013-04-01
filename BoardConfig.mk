@@ -58,25 +58,36 @@ TARGET_PROVIDES_LIBLIGHTS := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
 # OPPO FIND5 PARTITION LAYOUT 
-#dev:        size     erasesize name
-#mmcblk0p21: 000ffa00 00000200 "misc"
-#mmcblk0p20: 00fffe00 00000200 "recovery"
-#mmcblk0p19: 01000000 00000200 "boot"
-#mmcblk0p32: 73fffc00 00000200 "system"
-#mmcblk0p28: 00140200 00000200 "local"
-#mmcblk0p33: 27fffe00 00000200 "cache"
-#mmcblk0p34: 2e8000000 00000200 "userdata"
-#mmcblk0p24: 01400000 00000200 "devlog"
-#mmcblk0p26: 00040000 00000200 "pdata"
-#mmcblk0p29: 00010000 00000200 "extra"
-#mmcblk0p16: 03200200 00000200 "radio"
-#mmcblk0p17: 00a00000 00000200 "adsp"
-#mmcblk0p15: 00100000 00000200 "dsps"
-#mmcblk0p18: 007ffa00 00000200 "radio_config"
-#mmcblk0p22: 00400000 00000200 "modem_st1"
-#mmcblk0p23: 00400000 00000200 "modem_st2"
-#mmcblk0p30: 00100000 00000200 "cdma_record"
-#mmcblk0p31: 06069e00 00000200 "reserve"
+#DDR -> /dev/block/mmcblk0p15
+#aboot -> /dev/block/mmcblk0p17
+#boot -> /dev/block/mmcblk0p18
+#cache -> /dev/block/mmcblk0p22
+#m9kefs1 -> /dev/block/mmcblk0p12
+#m9kefs2 -> /dev/block/mmcblk0p13
+#m9kefs3 -> /dev/block/mmcblk0p14
+#m9kefsc -> /dev/block/mmcblk0p16
+#misc -> /dev/block/mmcblk0p23
+#modem -> /dev/block/mmcblk0p1
+#modemst1 -> /dev/block/mmcblk0p8
+#modemst2 -> /dev/block/mmcblk0p9
+#oppodycnvbk -> /dev/block/mmcblk0p10
+#oppostanvbk -> /dev/block/mmcblk0p11
+#pad -> /dev/block/mmcblk0p7
+#persist -> /dev/block/mmcblk0p21
+#recovery -> /dev/block/mmcblk0p24
+#reserve1 -> /dev/block/mmcblk0p25
+#reserve2 -> /dev/block/mmcblk0p26
+#reserve3 -> /dev/block/mmcblk0p27
+#reserve4 -> /dev/block/mmcblk0p28
+#rpm -> /dev/block/mmcblk0p5
+#sbl1 -> /dev/block/mmcblk0p2
+#sbl2 -> /dev/block/mmcblk0p3
+#sbl3 -> /dev/block/mmcblk0p4
+#sdcard -> /dev/block/mmcblk0p29
+#system -> /dev/block/mmcblk0p19
+#tz -> /dev/block/mmcblk0p6
+#userdata -> /dev/block/mmcblk0p20
+
 
 
 # Filesystem

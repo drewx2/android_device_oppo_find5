@@ -21,26 +21,26 @@ DEVICE_PACKAGE_OVERLAYS += device/oppo/find5/overlay
 
 # Boot ramdisk setup
 #PRODUCT_PACKAGES += \
-    init.qcom.sh \
-    init.qcom.usb.rc \
-    init.qcom.rc \
-    ueventd.qcom.rc
+#    init.qcom.sh \
+#    init.qcom.usb.rc \
+#    init.qcom.rc \
+#    ueventd.qcom.rc
 
 # Qualcomm scripts
 PRODUCT_COPY_FILES += \
-    device/oppo/find5/configs/init.ath3k.bt.sh:/system/etc/init.ath3k.bt.sh \
-    device/oppo/find5/configs/init.goldfish.sh:/system/etc/init.goldfish.sh \
-    device/oppo/find5/configs/init.qcom.bt.sh:/system/etc/init.qcom.bt.sh \
-    device/oppo/find5/configs/init.qcom.coex.sh:/system/etc/init.qcom.coex.sh \
-    device/oppo/find5/configs/init.efs.sync.sh:/system/etc/init.efs.sync.sh \
-    device/oppo/find5/configs/init.qcom.fm.sh:/system/etc/init.qcom.fm.sh \
-    device/oppo/find5/configs/init.mdm_links.sh:/system/etc/init.mdm_links.sh \
-    device/oppo/find5/configs/init.modem_links.sh:/system/etc/init.modem_links.sh \
-    device/oppo/find5/configs/init.qcom.post_boot.sh:/system/etc/init.qcom.post_boot.sh \
-    device/oppo/find5/configs/init.qcom.post_fs.sh:/system/etc/init.qcom.post_fs.sh \
-    device/oppo/find5/configs/init.qcom.sdio.sh:/system/etc/init.qcom.sdio.sh \
-    device/oppo/find5/configs/init.qcom.thermald_conf.sh:/system/etc/init.qcom.thermald_conf.sh \
-    device/oppo/find5/configs/init.qcom.wifi.sh:/system/etc/init.qcom.wifi.sh \
+    device/oppo/find5/configs/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
+    device/oppo/find5/configs/init.goldfish.sh:system/etc/init.goldfish.sh \
+    device/oppo/find5/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+    device/oppo/find5/configs/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+    device/oppo/find5/configs/init.efs.sync.sh:system/etc/init.efs.sync.sh \
+    device/oppo/find5/configs/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    device/oppo/find5/configs/init.mdm_links.sh:system/etc/init.mdm_links.sh \
+    device/oppo/find5/configs/init.modem_links.sh:system/etc/init.modem_links.sh \
+    device/oppo/find5/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+    device/oppo/find5/configs/init.qcom.post_fs.sh:system/etc/init.qcom.post_fs.sh \
+    device/oppo/find5/configs/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
+    device/oppo/find5/configs/init.qcom.thermald_conf.sh:system/etc/init.qcom.thermald_conf.sh \
+    device/oppo/find5/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -68,7 +68,7 @@ PRODUCT_PACKAGES += \
   	alsa.msm8960 \
     audio_policy.default \
     libalsa-intf \
-    libaudioutils \
+    libaudioutils
 
 # Bluetooth
 PRODUCT_PACKAGES += \

@@ -52,7 +52,7 @@ lib/libllvm-a3xx.so
 lib/libllvm-arm.so
 lib/libOpenCL.so
 lib/libOpenVG.so
-
+lib/libgenlock.so
 
 # GPS
 lib/libloc_api_v02.so

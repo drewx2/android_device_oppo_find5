@@ -508,7 +508,7 @@ struct v4l2_framebuffer {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct v4l2_clip {
  struct v4l2_rect c;
- struct v4l2_clip __user *next;
+ struct v4l2_clip *next;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct v4l2_window {
@@ -516,9 +516,9 @@ struct v4l2_window {
  enum v4l2_field field;
  __u32 chromakey;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct v4l2_clip __user *clips;
+ struct v4l2_clip *clips;
  __u32 clipcount;
- void __user *bitmap;
+ void *bitmap;
  __u8 global_alpha;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };

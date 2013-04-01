@@ -1,10 +1,19 @@
 # mount point	fstype		device			[device2]
-/boot		emmc		/dev/block/mmcblk0p19
-/cache		ext4		/dev/block/mmcblk0p33
-/data		ext4		/dev/block/mmcblk0p34
-/misc		emmc		/dev/block/mmcblk0p21
-/recovery	emmc		/dev/block/mmcblk0p20
-/sdcard		vfat		/dev/block/mmcblk0p34	
-/system		ext4		/dev/block/mmcblk0p32
-/devlog		ext4		/dev/block/mmcblk0p24
-/reserve        vfat            /dev/block/mmcblk0p31
+/oppodycnvbk   emmc     /dev/block/platform/msm_sdcc.1/by-name/oppodycnvbk
+/modem         emmc     /dev/block/platform/msm_sdcc.1/by-name/modem
+/modem_st1     emmc     /dev/block/platform/msm_sdcc.1/by-name/modemst1
+/modem_st2     emmc     /dev/block/platform/msm_sdcc.1/by-name/modemst2
+/rpm           emmc     /dev/block/platform/msm_sdcc.1/by-name/rpm
+/sbl1          emmc     /dev/block/platform/msm_sdcc.1/by-name/sbl1
+/sbl2          emmc     /dev/block/platform/msm_sdcc.1/by-name/sbl2
+/sbl3          emmc     /dev/block/platform/msm_sdcc.1/by-name/sbl3
+/static_nv_bk  emmc     /dev/block/platform/msm_sdcc.1/by-name/oppostanvbk
+/tz            emmc     /dev/block/platform/msm_sdcc.1/by-name/tz
+/aboot         emmc     /dev/block/platform/msm_sdcc.1/by-name/aboot
+/boot		   emmc		/dev/block/platform/msm_sdcc.1/by-name/boot
+/data		   ext4		/dev/block/platform/msm_sdcc.1/by-name/userdata
+/cache		   ext4		/dev/block/platform/msm_sdcc.1/by-name/cache
+/misc		   emmc		/dev/block/platform/msm_sdcc.1/by-name/misc
+/system		   ext4		/dev/block/platform/msm_sdcc.1/by-name/system
+/sdcard		   vfat		/dev/block/platform/msm_sdcc.1/by-name/sdcard	 /dev/block/mmcblk0
+/recovery	   emmc		/dev/block/platform/msm_sdcc.1/by-name/recovery
