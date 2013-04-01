@@ -65,8 +65,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	audio.primary.default \
 	audio.primary.msm8960 \
-  	alsa.msm8960 \
+	audio.a2dp.default \
     audio_policy.default \
+	audio_policy.msm8960 \
     libalsa-intf \
     libaudioutils
 
@@ -83,10 +84,14 @@ PRODUCT_PACKAGES += \
     copybit.msm8960 \
     gralloc.default \
     gralloc.msm8960 \
-    hwcomposer.default \
     hwcomposer.msm8960 \
     libgenlock \
-	liboverlay
+    libhwcexternal \
+    libhwcservice \
+    libmemalloc \
+    liboverlay \
+    libqdutils \
+    libtilerenderer
     
 # Lights
 PRODUCT_PACKAGES += \
@@ -94,8 +99,9 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libdivxdrmdecrypt \
+    libI420colorconvert \
+    libmm-omxcore \
     libOmxCore \
     libOmxVdec \
     libOmxVenc \
@@ -107,7 +113,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8960
+    power.default
 
 # HDMI
 PRODUCT_PACKAGES += \
