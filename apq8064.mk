@@ -32,10 +32,10 @@ PRODUCT_COPY_FILES += \
     device/oppo/find5/configs/init.goldfish.sh:system/etc/init.goldfish.sh \
     device/oppo/find5/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/oppo/find5/configs/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    device/oppo/find5/configs/init.efs.sync.sh:system/etc/init.efs.sync.sh \
+    device/oppo/find5/configs/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     device/oppo/find5/configs/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    device/oppo/find5/configs/init.mdm_links.sh:system/etc/init.mdm_links.sh \
-    device/oppo/find5/configs/init.modem_links.sh:system/etc/init.modem_links.sh \
+    device/oppo/find5/configs/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
+    device/oppo/find5/configs/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
     device/oppo/find5/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     device/oppo/find5/configs/init.qcom.post_fs.sh:system/etc/init.qcom.post_fs.sh \
     device/oppo/find5/configs/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
