@@ -79,11 +79,7 @@ loglevel 3
     write /proc/sys/kernel/sched_child_runs_first 0
     write /proc/sys/kernel/randomize_va_space 2
     write /proc/sys/kernel/kptr_restrict 2
-    #ifdef VENDOR_EDIT
-    # modify for last_kmsg read 2012/11/28
-    write /proc/sys/kernel/dmesg_restrict 0
-    #endif /*VENDOR_EDIT*/
-    # write /proc/sys/kernel/dmesg_restrict 1
+    write /proc/sys/kernel/dmesg_restrict 1
     write /proc/sys/vm/mmap_min_addr 32768
     write /proc/sys/kernel/sched_rt_runtime_us 950000
     write /proc/sys/kernel/sched_rt_period_us 1000000
@@ -179,12 +175,10 @@ on post-fs-data
     mkdir /data/misc/keychain 0771 system system
     mkdir /data/misc/vpn 0770 system vpn
     mkdir /data/misc/systemkeys 0700 system system
- 
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0751 root root
-    chmod 2770 /data/radio
 
     # For security reasons, /data/local/tmp should always be empty.
     # Do not place files or directories in /data/local/tmp
@@ -196,13 +190,12 @@ on post-fs-data
     mkdir /data/property 0700 root root
     mkdir /data/ssh 0750 root shell
     mkdir /data/ssh/empty 0700 root root
-    
-    # mwalker@OnlineRd.SDK.theme, 12/26/2012
-    mkdir /data/theme 0751 system system
-    mkdir /data/themetmp 0777 system system
+    mkdir /data/radio 0770 radio radio
 
-    # create dalvik-cache, so as to enforce our permissions
+    # create dalvik-cache and double-check the perms, so as to enforce our permissions
     mkdir /data/dalvik-cache 0771 system system
+    chown system system /data/dalvik-cache
+    chmod 0771 /data/dalvik-cache
 
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
@@ -211,17 +204,6 @@ on post-fs-data
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770 root root
-    
-    #ifdef VENDOR_EDIT
-    #feiser@OnlineRd.DeviceService.Assert, 2012/09/11 , add for oppo Assert
-    chmod 0777 /dev/otracer
-    #endif /* VENDOR_EDIT */
-    
-    #ifdef VENDOR_EDIT
-    # add for raw partition 2012/12/17
-    chmod 0660 /dev/block/mmcblk0p26
-    chown root system /dev/block/mmcblk0p26
-    #endif /* VENDOR_EDIT */
 
     # create directory for DRM plug-ins - give drm the read/write access to
     # the following directory.
@@ -232,6 +214,9 @@ on post-fs-data
     # won't work.
     # Set indication (checked by vold) that we have finished this action
     #setprop vold.post_fs_data_done 1
+
+# Include extra init file
+    import /init.cm.rc
 
 on boot
 # basic network init
@@ -263,7 +248,6 @@ on boot
     chown radio system /sys/android_power/acquire_partial_wake_lock
     chown radio system /sys/android_power/release_wake_lock
     chown system system /sys/power/state
-    chown system system /sys/power/autosleep
     chown system system /sys/power/wakeup_count
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock
@@ -288,8 +272,12 @@ on boot
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
 
     # Assume SMP uses shared cpufreq policy for all CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
@@ -317,45 +305,24 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
-#ifdef VENDOR_EDIT  
-#//feiser@OnlineRd.DeviceService.CameraFlashLED, 2012/10/19 , add for Camera Flash Led
-    chown system system /sys/devices/i2c-4/4-0030/test_flash
-    chown system system /sys/devices/i2c-4/4-0030/torch_control
-#endif
-
-#ifdef VENDOR_EDIT
-#zhengzk add on 2013-01-16 for camera display bluescreen
-	write /sys/module/msm_rtb/parameters/filter 32
-#endif /* VENDOR_EDIT */
-
-#add by chendx for charging settings 2012-10-30
-    chown system system /sys/bus/platform/devices/pm8921-charger/pm8921_chg
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.default 4096,87380,704512,4096,16384,110208
     setprop net.tcp.buffersize.wifi    524288,1048576,2097152,262144,524288,1048576
-    setprop net.tcp.buffersize.lte     4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsupa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsdpa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.evdo_b  4094,87380,262144,4096,16384,262144
-
-# Assign TCP buffer thresholds to be ceiling value of technology maximums
-# Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  2097152
-    write /proc/sys/net/core/wmem_max  1220608
+    setprop net.tcp.buffersize.lte     4096,87380,1220608,4096,16384,563200
+    setprop net.tcp.buffersize.umts    4096,87380,563200,4096,16384,110208
+    setprop net.tcp.buffersize.hspa    4096,87380,704512,4096,16384,110208
+    setprop net.tcp.buffersize.hsupa   4096,87380,704512,4096,16384,262144
+    setprop net.tcp.buffersize.hsdpa   4096,87380,704512,4096,16384,262144
+    setprop net.tcp.buffersize.hspap   4096,87380,1220608,4096,16384,393216
+    setprop net.tcp.buffersize.edge    4096,26280,35040,4096,16384,35040
+    setprop net.tcp.buffersize.gprs    4096,8760,11680,4096,8760,11680
+    setprop net.tcp.buffersize.evdo    4096,87380,563200,4096,16384,262144
+    setprop net.tcp.buffersize.evdo_b  4096,87380,704512,4096,16384,262144
 
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
-#ifdef VENDOR_EDIT  
-
-#Horn@OnLineRD.DeviceService, 2012-10-24, Add for fix sensor bug    
-    setprop system_init.startsensorservice  0
-#endif    
 
 # Run sysinit
     exec /system/bin/sysinit
@@ -368,19 +335,6 @@ on nonencrypted
 
 on charger
     class_start charger
-#ifdef VENDOR_EDIT  
-#Horn@OnLineRD.DeviceService, 2012-12-03, Add for quickboot
-
-# add for saving power
-    start qcom-post-boot
-# end add
-
-# add for fix mdm bug, or mdm will reset repeatly    
-    start qcom-c_core-sh
-    start qcom-c_main-sh
-# end add 
-
-#endif
 
 on property:vold.decrypt=trigger_reset_main
     class_reset main
@@ -411,20 +365,9 @@ service ueventd /sbin/ueventd
 service console /system/bin/sh
     class core
     console
- #   disabled
- #   user shell
- #   group log
-#ifdef VENDOR_EDIT  
-#Horn@OnLineRD.DeviceService, 2012-10-24, Add for quickboot
-service charger /system/bin/quickboot
-    class charger
-    user root
-    oneshot
-
-on property:sys.boot.android=1
-    class_start core
-    class_start main
-#endif
+    disabled
+    user shell
+    group log
 
 on property:ro.debuggable=1
     start console
@@ -438,15 +381,6 @@ service adbd /sbin/adbd
 on property:ro.kernel.qemu=1
     start adbd
 
-#ifdef VENDOR_EDIT
-#yansen@OnLineRD.DeviceService, 2012/11/28, add by yansen begin for only start/stop adbd ,not change com driver
-#on property:persist.service.adb.enable=1
-#    start adbd
-
-#on property:persist.service.adb.enable=0
-#    stop adbd
-#endif
-    
 service servicemanager /system/bin/servicemanager
     class core
     user system
@@ -455,10 +389,6 @@ service servicemanager /system/bin/servicemanager
     onrestart restart zygote
     onrestart restart media
     onrestart restart surfaceflinger
-#ifdef VENDOR_EDIT  
-#Horn@OnLineRD.DeviceService, 2012-10-24, Add for fix sensor bug        
-    onrestart restart sensorservice
-#endif    
     onrestart restart drm
 
 service vold /system/bin/vold
@@ -480,19 +410,13 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc diag qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc qcom_diag log
 
 service surfaceflinger /system/bin/surfaceflinger
-    class main
+    class core
     user system
     group graphics
     onrestart restart zygote
-#ifdef VENDOR_EDIT  
-#Horn@OnLineRD.DeviceService, 2012-10-24, Add for fix sensor bug    
-service sensorservice /system/bin/sensorservice
-    class main
-    user  root
-#endif       
 
 service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
     class main
@@ -513,22 +437,12 @@ service media /system/bin/mediaserver
     group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc qcom_diag
     ioprio rt 4
 
-#ifdef VENDOR_EDIT
-#Roshan@OnLineRD.DeviceService, 2012/10/20, add for oppo animation, author mwalker
 service bootanim /system/bin/bootanimation
     class main
     user graphics
-    group system graphics audio media
+    group system audio graphics
     disabled
     oneshot
-
- service rbootanim /system/bin/bootanimation -r
-    class main
-    user graphics
-    group graphics audio media
-    disabled
-    oneshot
-#endif /* VENDOR_EDIT */
 
 service dbus /system/bin/dbus-daemon --system --nofork
     class main
@@ -588,12 +502,3 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
-
-#ifdef VENDOR_EDIT
-#Chenps@OnLineRD.framework, add begin for /frameworks/base/packages/Dumplog
-service dumplog /system/bin/dumpstate -t feedback
-    class main
-    socket dumpstate stream 0660 shell log
-    disabled
-    oneshot
-#endif /* VENDOR_EDIT */

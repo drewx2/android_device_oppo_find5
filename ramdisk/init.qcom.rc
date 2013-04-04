@@ -246,14 +246,13 @@ on post-fs-data
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
-   class late_start
    user root
    disabled
    oneshot
 
 on property:init.svc.surfaceflinger=stopped
 #    stop ppd
-    stop hdmid
+#    stop hdmid
 
 on property:ro.board.platform=msm7630_fusion
     start usbhub_init
@@ -531,8 +530,7 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
     disabled
     oneshot
 
-
-on property:sys.boot_completed=1
+on property:init.svc.bootanim=stopped
     start qcom-post-boot
 
 service atfwd /system/bin/ATFWD-daemon
