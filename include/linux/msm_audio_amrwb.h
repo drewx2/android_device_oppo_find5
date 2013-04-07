@@ -16,33 +16,16 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef __MSM_AUDIO_QCP_H
-#define __MSM_AUDIO_QCP_H
+#ifndef __MSM_AUDIO_AMRWB_H
+#define __MSM_AUDIO_AMRWB_H
 #include <linux/msm_audio.h>
-#define AUDIO_SET_QCELP_ENC_CONFIG _IOW(AUDIO_IOCTL_MAGIC,   0, struct msm_audio_qcelp_enc_config)
+#define AUDIO_GET_AMRWB_ENC_CONFIG _IOW(AUDIO_IOCTL_MAGIC,   (AUDIO_MAX_COMMON_IOCTL_NUM+0),   struct msm_audio_amrwb_enc_config)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define AUDIO_GET_QCELP_ENC_CONFIG _IOR(AUDIO_IOCTL_MAGIC,   1, struct msm_audio_qcelp_enc_config)
-#define AUDIO_SET_EVRC_ENC_CONFIG _IOW(AUDIO_IOCTL_MAGIC,   2, struct msm_audio_evrc_enc_config)
-#define AUDIO_GET_EVRC_ENC_CONFIG _IOR(AUDIO_IOCTL_MAGIC,   3, struct msm_audio_evrc_enc_config)
-#define CDMA_RATE_BLANK 0x00
+#define AUDIO_SET_AMRWB_ENC_CONFIG _IOR(AUDIO_IOCTL_MAGIC,   (AUDIO_MAX_COMMON_IOCTL_NUM+1),   struct msm_audio_amrwb_enc_config)
+struct msm_audio_amrwb_enc_config {
+ uint32_t band_mode;
+ uint32_t dtx_enable;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define CDMA_RATE_EIGHTH 0x01
-#define CDMA_RATE_QUARTER 0x02
-#define CDMA_RATE_HALF 0x03
-#define CDMA_RATE_FULL 0x04
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define CDMA_RATE_ERASURE 0x05
-struct msm_audio_qcelp_enc_config {
- uint32_t cdma_rate;
- uint32_t min_bit_rate;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- uint32_t max_bit_rate;
-};
-struct msm_audio_evrc_enc_config {
- uint32_t cdma_rate;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- uint32_t min_bit_rate;
- uint32_t max_bit_rate;
+ uint32_t frame_format;
 };
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
