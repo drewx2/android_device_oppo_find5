@@ -90,6 +90,7 @@ PRODUCT_PACKAGES += \
     libhwcservice \
     libmemalloc \
     liboverlay \
+	libqdMetaData \
     libqdutils \
     libtilerenderer
     
